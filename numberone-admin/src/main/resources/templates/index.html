@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@
         }
     </style>
 </head>
+
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden"
       th:classappend="${@config.getKey('sys.index.skinName')}">
 <div id="wrapper">
@@ -45,7 +47,7 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="logo">
-                    <span class="logo-lg">定制公交后台</span>
+                    <span class="logo-lg">定制公交后台管理</span>
                 </li>
                 <li>
                     <div class="user-panel">
@@ -59,7 +61,8 @@
                         <div class="pull-left info">
                             <p>[[${user.loginName}]]</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
-                            <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i>
+                            <a th:href="@{logout}" style="padding-left:5px;"><i
+                                    class="fa fa-sign-out text-danger"></i>
                                 注销</a>
                         </div>
                     </div>
@@ -68,13 +71,7 @@
                     <a href="index.html"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="menuItem" th:href="@{/system/main}">定制公交指南</a></li>
-                        <li>
-                            <a class="menuItem" th:href="@{/system/main1}">班车订购指南</a>
-                        </li>
-                        <li>
-                            <a class="menuItem" href="/system/menu">班车乘坐指南</a>
-                        </li>
+                        <li class="active"><a class="menuItem" th:href="@{/system/main}">定制公交</a></li>
                     </ul>
                 </li>
                 <li th:each="menu : ${menus}">
@@ -111,10 +108,6 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-                    <!--                    <li><a title="官方店铺"-->
-                    <!--                           href="https://item.taobao.com/item.htm?spm=a230r.1.14.34.30fe78dbrWeYhv&id=589400109289&ns=1&abbucket=3#detail"-->
-                    <!--                           target="_blank"><i class="fa fa-question-circle"></i> 官方店铺</a>-->
-                    <!--                    </li>-->
                     <li><a title="全屏显示" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">

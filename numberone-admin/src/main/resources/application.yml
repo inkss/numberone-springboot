@@ -116,18 +116,18 @@ shiro:
 # 防止XSS攻击
 xss: 
   # 过滤开关
-  enabled: true
+  enabled: false
   # 排除链接（多个用逗号分隔）
   excludes: /system/notice/*
   # 匹配链接
-  urlPatterns: /system/*,/monitor/*,/tool/*
+  urlPatterns: /system/*,/monitor/*,/tool/*,/szyink/*
 
 # 代码生成
 gen: 
   # 作者
   author: numberone
   # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
-  packageName: com.numberone.system
+  packageName: com.numberone.szyink
   # 自动去除表前缀，默认是true
   autoRemovePre: true
   # 表前缀(类名不会包含表前缀)
