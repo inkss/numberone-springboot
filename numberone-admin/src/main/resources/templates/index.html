@@ -109,6 +109,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li><a title="全屏显示" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                    <li><a title="网站首页" href="http://localhost:8088/index-main"><i class="fa fa-globe"></i> 网站首页</a></li>
                     <li class="dropdown user-menu">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                             <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}"

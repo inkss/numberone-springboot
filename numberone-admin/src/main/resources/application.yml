@@ -91,11 +91,11 @@ shiro:
     # 权限认证失败地址
     unauthorizedUrl: /unauth
     # 首页地址
-    indexUrl: /index
+    indexUrl: /index-main
     # 验证码开关
     captchaEnabled: true
     # 验证码类型 math 数组计算 char 字符
-    captchaType: math
+    captchaType: char
   cookie:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain: 
@@ -122,13 +122,4 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*,/szyink/*
 
-# 代码生成
-gen: 
-  # 作者
-  author: numberone
-  # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
-  packageName: com.numberone.szyink
-  # 自动去除表前缀，默认是true
-  autoRemovePre: true
-  # 表前缀(类名不会包含表前缀)
-  tablePrefix: sys_
+

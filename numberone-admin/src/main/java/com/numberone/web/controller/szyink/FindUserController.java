@@ -27,15 +27,14 @@ public class FindUserController extends BaseController {
 
     @RequiresPermissions("szyink:dzgj:view")
     @GetMapping()
-    public String ssss(ModelMap mmap) {
+    public String index(ModelMap mmap) {
 
-        TestMe testMe = new TestMe();
         SysUser user = getSysUser();
         user.setSex(dictDataService.selectDictLabel("sys_user_sex", user.getSex()));
         mmap.put("user", user);
         mmap.put("roleGroup", userService.selectUserRoleGroup(user.getUserId()));
         mmap.put("postGroup", userService.selectUserPostGroup(user.getUserId()));
-        System.out.println(mmap);
+
         return prefix + "/dzgj.html";
     }
 }

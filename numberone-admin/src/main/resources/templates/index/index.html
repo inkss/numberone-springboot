@@ -1,0 +1,164 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定制公交</title>
+    <link th:href="@{favicon.ico}" rel="stylesheet"/>
+    <link type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" th:href="@{/images/master.css}"  rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 banner">
+                <div class="col-sm-6 logo">定制公交系统</div>
+                <div class="col-sm-6 choose">
+                    <ol class="list-inline">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#" target="_blank">互动</a></li>
+                        <li><a href="#" target="_blank">须知</a></li>
+                        <li><a href="#" target="_blank">公告</a></li>
+                        <li id="LoginOrLogout" class="login pull-right"><a
+                                href="http://localhost:8088/index">个人中心</a>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="download col-sm-6 col-sm-offset-5 hidden-xs">
+                    <div class="link col-sm-6">
+                        <!-- <a href="http://www.cddzgj.com/apk/cddzgj.apk"><img src="./images/android.png"
+                                alt="Android版下载"></a>
+                        <a href="https://itunes.apple.com/cn/app/cheng-dou-ding-zhi-gong-jiao/id1118809735?mt=8#"><img
+                                src="./images/ios.png" alt="iOS版下载"></a> -->
+                    </div>
+                    <div class="barcode col-sm-6">
+                        <!-- <img src="./images/barcode.png"> -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</header>
+<!--广告展示页面-->
+<div class="container">
+    <div class="row advert">
+        <div id="analytics-index" class="col-sm-4" style="visibility: visible;">
+            <p class="n-title">服务人次</p>
+            <p class="num">446359</p>
+            <p class="message">
+                    <span>
+                        <span class="blue">7155</span><span>线路招募</span>
+                    </span>
+                <line class="ver-line"></line>
+                <span>
+                        <span class="blue">58086</span><span>出行需求</span>
+                    </span>
+            </p>
+            <p id="Month" class="message may">
+                    <span>
+                        <span class="blue">0</span><span>订购</span>
+                    </span>
+                <line class="ver-line"></line>
+                <span>
+                        <span class="blue">0</span><span>预约</span>
+                    </span>
+            </p>
+        </div>
+        <div class="pics col-sm-8 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+                <a href="#" target="_blank">
+                    <p class="going"></p>
+                    <p class="m-text">
+                        <img src="./images/arrow.png">
+                        <span class="m-h2">出行需求</span>
+                        <span>提交您的出行需求</span>
+                    </p>
+                </a>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <a href="#" target="_blank">
+                    <p class="drive-line">
+                    </p>
+                    <p class="m-text">
+                        <span class="m-h2">线路招募</span>
+                        <span>选择适合您的线路</span>
+                    </p>
+                </a>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <a href="#" target="_blank">
+                    <p class="group"></p>
+                    <p class="m-text">
+                        <span class="m-h2">线路查询</span>
+                        <span>查看现有开通线路</span>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="lines-table">
+    <div class="container">
+        <div class="row main">
+            按需建设 | 安全快捷 |
+            公交专用 | 优先通行 |
+            安全舒适 | 一站直达 |
+            节能减排 | 绿色环保 |
+            定制公交 | 先进时尚
+        </div>
+        <br>
+    </div>
+</div>
+
+
+
+<footer>
+    <article>
+        <div class="container">
+            <div class="help row">
+                <div class="col-sm-3 col-xs-6">
+                    <h2><a href="http://www.cddzgj.com/help.html#h10" target="_blank">定制公交介绍</a></h2>
+                    <h3><a href="http://www.cddzgj.com/help.html#h11" target="_blank">定制公交提供哪些服务？</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h12" target="_blank">定制公交有哪些优点？</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h13" target="_blank">如何获取定制公交服务？</a></h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h2><a href="http://www.cddzgj.com/help.html#h20" target="_blank">招募报名指南</a></h2>
+                    <h3><a href="http://www.cddzgj.com/help.html#h21" target="_blank">什么是出行需求调研？</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h22" target="_blank">如何参与线路招募？</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h23" target="_blank">出行需求调查的目的？</a></h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h2><a href="http://www.cddzgj.com/help.html#h30" target="_blank">班车订购指南</a></h2>
+                    <h3><a href="http://www.cddzgj.com/help.html#h31" target="_blank">定制公交订购规则</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h32" target="_blank">定制公交订购协议</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h33" target="_blank">如何预订定制公交</a></h3>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <h2><a href="http://www.cddzgj.com/help.html#h40" target="_blank">班车乘坐指南</a></h2>
+                    <h3><a href="http://www.cddzgj.com/help.html#h41" target="_blank">班车乘坐常见问题</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h42" target="_blank">定制公交乘客须知</a></h3>
+                    <h3><a href="http://www.cddzgj.com/help.html#h43" target="_blank">定制公交乘车规则</a></h3>
+                </div>
+            </div>
+
+        </div>
+    </article>
+    <p>
+        <em id="copy"></em> <a href="#" title="定制公交运营中心"
+                               target="_blank">定制公交运营中心</a>&nbsp;&nbsp;服务热线：010-123456789
+    </p>
+</footer>
+
+
+
+<script th:src="@{/images/jquery.min.js}" ></script>
+<script th:src="@{/images/bootstrap.min.js}" ></script>
+<script th:src="@{/images/vue.min.js}" ></script>
+<script th:src="@{/images/index.js}" ></script>
+</body>
+</html>
