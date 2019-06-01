@@ -40,7 +40,8 @@ public class SysIndexController extends BaseController
     @GetMapping("/system/main")
     public String main(ModelMap mmap)
     {
-        mmap.put("version", Global.getVersion());
+        SysUser user = getSysUser();
+        mmap.put("user", user);
         return "main";
     }
 }

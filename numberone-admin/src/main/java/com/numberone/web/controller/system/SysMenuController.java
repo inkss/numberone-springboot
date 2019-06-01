@@ -36,8 +36,9 @@ public class SysMenuController extends BaseController
 
     @RequiresPermissions("system:menu:view")
     @GetMapping()
-    public String menu()
+    public String menu(ModelMap mmap)
     {
+
         return prefix + "/menu";
     }
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <!--360浏览器优先以webkit内核解析-->
+    <title>路线管理</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
+
+    <style type="text/css">
+        #allmap {
+            height: 750px;
+            margin: 0;
+            font-family: "微软雅黑";
+
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg"></script>
+</head>
+
+<body class="gray-bg">
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-sm-12"></div>
+    <div class="col-sm-6" style="padding: 10px;">
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
+            <h2><i class="fa fa-map-marker"></i> 路线管理</h2>
+
+        </div>
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 10px">
+            <small>欢迎访问定制公交后台管理系统。</small>
+        </div>
+    </div>
+    <div class="col-sm-6" style=" padding: 10px;">
+        <div id="allmap" style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom("大连",12);
+    var menu = new BMap.ContextMenu();
+    var txtMenuItem = [
+        {
+            text: '放大',
+            callback: function () {
+                map.zoomIn()
+            }
+        },
+        {
+            text: '缩小',
+            callback: function () {
+                map.zoomOut()
+            }
+        }
+    ];
+    var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+    var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+    var overViewOpen = new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT}); // 右下角，缩略图
+    for (var i = 0; i < txtMenuItem.length; i++) {
+        menu.addItem(new BMap.MenuItem(txtMenuItem[i].text, txtMenuItem[i].callback, 100));
+    }
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.addControl(top_left_control);
+    map.addControl(top_left_navigation);
+    map.addControl(overViewOpen);
+    map.addContextMenu(menu);
+</script>
+</body>
+
+</html>
