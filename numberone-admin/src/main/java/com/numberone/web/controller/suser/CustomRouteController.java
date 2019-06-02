@@ -11,9 +11,12 @@ public class CustomRouteController {
 
     private String prefix = "suser/customroute/";
 
+
+
     @RequiresPermissions("user:suser:view")
     @GetMapping
     public String index() {
         return prefix + "customr.html";
     }
+
 }

@@ -43,8 +43,6 @@
         <module>numberone-admin</module>
         <module>numberone-framework</module>
         <module>numberone-system</module>
-        <module>numberone-quartz</module>
-        <module>numberone-generator</module>
         <module>numberone-common</module>
     </modules>
     <packaging>pom</packaging>
@@ -92,6 +90,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

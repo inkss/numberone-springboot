@@ -95,6 +95,7 @@ public class SysNoticeController extends BaseController
     public AjaxResult editSave(SysNotice notice)
     {
         notice.setUpdateBy(ShiroUtils.getLoginName());
+
         return toAjax(noticeService.updateNotice(notice));
     }
 

@@ -96,10 +96,10 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">当前出行</label>
                     <div class="layui-input-block" >
-                        <input type="checkbox" name="now_type" value="1" lay-skin="primary" title="公交" >
-                        <input type="checkbox" name="now_type" value="2" lay-skin="primary" title="地铁">
-                        <input type="checkbox" name="now_type" value="3" lay-skin="primary" title="出租">
-                        <input type="checkbox" name="now_type" value="4" lay-skin="primary" title="自驾">
+                        <input type="radio" name="now_type" value="1" title="公交">
+                        <input type="radio" name="now_type" value="2" title="地铁">
+                        <input type="radio" name="now_type" value="3" title="出租">
+                        <input type="radio" name="now_type" value="4" title="自驾">
                     </div>
                 </div>
 
@@ -229,15 +229,15 @@
 
     // 根据名称获取坐标和标注到图上的方法
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    var local = new BMap.LocalSearch(map, {
-        onSearchComplete: function() {
-            map.clearOverlays(); //清除地图上所有覆盖物
-            var point = local.getResults().getPoi(0).point; // point 就是获取到的坐标
-            map.centerAndZoom(point, 16);
-            map.addOverlay(new BMap.Marker(point));
-        }
-    });
-    local.search("大连大学");
+    // var local = new BMap.LocalSearch(map, {
+    //     onSearchComplete: function() {
+    //         map.clearOverlays(); //清除地图上所有覆盖物
+    //         var point = local.getResults().getPoi(0).point; // point 就是获取到的坐标
+    //         map.centerAndZoom(point, 16);
+    //         map.addOverlay(new BMap.Marker(point));
+    //     }
+    // });
+    // local.search("大连大学");
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     //============================ Layui 部分
