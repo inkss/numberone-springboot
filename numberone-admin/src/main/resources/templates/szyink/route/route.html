@@ -10,24 +10,15 @@
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
     <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />
     <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
-
-    <style type="text/css">
-        #allmap {
-            height: 750px;
-            margin: 0;
-            font-family: "微软雅黑";
-
-        }
-    </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg"></script>
 </head>
 
 <body class="gray-bg">
 <div class="row  border-bottom white-bg dashboard-header">
-    <div class="col-sm-12"></div>
+
     <div class="col-sm-6" style="padding: 10px;">
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
-            <h2><i class="fa fa-map-marker"></i> 路线管理</h2>
+            <h2><i class="fa fa-map-marker"></i> 路线管理  | <small>欢迎访问定制公交后台管理系统</small></h2>
 
         </div>
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 10px">
@@ -35,7 +26,7 @@
         </div>
     </div>
     <div class="col-sm-6" style=" padding: 10px;">
-        <div id="allmap" style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px"></div>
+        <div id="allmap" style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);height: -webkit-fill-available;"></div>
     </div>
 </div>
 

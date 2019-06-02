@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <!--360浏览器优先以webkit内核解析-->
+    <title>定制需求</title>
+<!--    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />-->
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+<!--    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />-->
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
+    <link href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet" media="all">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg">
+    </script>
+    <script type="text/javascript" src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+</head>
+
+<body class="gray-bg">
+<div class="layui-row  border-bottom white-bg dashboard-header">
+    <div class="layui-col-xs6" style="padding: 10px;">
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
+            <h2><i class="fa fa-map-marker"></i> 定制需求 | <small>欢迎访问定制公交后台管理系统</small></h2>
+
+        </div>
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 10px">
+            <small>Tips：在设定完毕地点之后，您可以查看可能的出行路线。</small>
+        </div>
+
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 1% 10px;">
+
+            <form class="layui-form" action="">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">居住地</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="suggestId" name="live_place" autocomplete="off" lay-verify="required" placeholder="请选择上班出发地点" class="layui-input" >
+                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">办公地</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="suggestId2" name="job_place" autocomplete="off" lay-verify="required" placeholder="请选择下班出发地点" class="layui-input">
+                        <div id="searchResultPanel2" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">上班时间</label>
+                        <div class="layui-input-inline" >
+                            <select name="work_time" lay-verify="required">
+                                <option value="">选择您的上班时间</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:10">08:10</option>
+                                <option value="08:20">08:20</option>
+                                <option value="08:30">08:30</option>
+                                <option value="08:40">08:40</option>
+                                <option value="08:50">08:50</option>
+                                <option value="09:00">09:00</option>
+                                <option value="09:10">09:10</option>
+                                <option value="09:20">09:20</option>
+                                <option value="09:30">09:30</option>
+                                <option value="09:40">09:40</option>
+                                <option value="09:50">09:50</option>
+                                <option value="10:00">10:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">下班时间</label>
+                        <div class="layui-input-inline">
+                            <select name="off_time" lay-verify="required">
+                                <option value="">选择您的下班时间</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:10">17:10</option>
+                                <option value="17:20">17:20</option>
+                                <option value="17:30">17:30</option>
+                                <option value="17:40">17:40</option>
+                                <option value="17:50">17:50</option>
+                                <option value="18:00">18:00</option>
+                                <option value="18:10">18:10</option>
+                                <option value="18:20">18:20</option>
+                                <option value="18:30">18:30</option>
+                                <option value="18:40">18:40</option>
+                                <option value="18:50">18:50</option>
+                                <option value="19:00">19:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前出行</label>
+                    <div class="layui-input-block" >
+                        <input type="checkbox" name="now_type" value="1" lay-skin="primary" title="公交" >
+                        <input type="checkbox" name="now_type" value="2" lay-skin="primary" title="地铁">
+                        <input type="checkbox" name="now_type" value="3" lay-skin="primary" title="出租">
+                        <input type="checkbox" name="now_type" value="4" lay-skin="primary" title="自驾">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="form-sub">提交需求</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <div class="layui-col-xs6" style=" padding: 10px;">
+        <div id="allmap" style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);height: -webkit-fill-available;"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    // 公共变量
+    var mappoit1 = ""; // 居住点坐标
+    var mappoit2 = "";
+
+    // 公共函数
+    function G(id) {
+        return document.getElementById(id);
+    }
+
+    //============================ 百度地图API功能
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom("大连", 12);
+    map.enableScrollWheelZoom(true);
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT}));
+    map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));
+    map.addControl(new BMap.OverviewMapControl({isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT}));
+
+    //============================ 对两个点的处理
+    var myValue; // 存储了选中位置的地理位置
+    var ac = new BMap.Autocomplete({"input" : "suggestId","location" : map});
+    ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+        var _value = e.fromitem.value;
+        var value = "";
+        if (e.fromitem.index > -1) {
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+        value = "";
+        if (e.toitem.index > -1) {
+            _value = e.toitem.value;
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+        G("searchResultPanel").innerHTML = str;
+    });
+    ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+        map.clearOverlays();    //清除地图上所有覆盖物
+        function myFun(){
+            var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+            mappoit1 = pp;
+            if (mappoit2.length != 0) {  // 这个判断是当一个输入框已经有值了，便执行路线规划
+                var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+                driving.search(mappoit1, mappoit2);
+            } else { // 否则便是设置搜索点到地图中央
+                map.centerAndZoom(pp, 16);
+                map.addOverlay(new BMap.Marker(pp));    //添加标注
+            }
+        }
+        var local = new BMap.LocalSearch(map, { //智能搜索
+            onSearchComplete: myFun
+        });
+        local.search(myValue);
+    });
+
+    // 2 点和 1 点的处理逻辑是一样的，实在没心情抽象它为函数了
+    var myValue2; // 存储了选中位置的地理位置
+    var ac2 = new BMap.Autocomplete({"input" : "suggestId2","location" : map});
+    ac2.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+        var _value = e.fromitem.value;
+        var value = "";
+        if (e.fromitem.index > -1) {
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+        value = "";
+        if (e.toitem.index > -1) {
+            _value = e.toitem.value;
+            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        }
+        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+        G("searchResultPanel").innerHTML = str;
+    });
+    ac2.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        myValue2 = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+        G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue2;
+
+        function myFun(){
+            map.clearOverlays();    //清除地图上所有覆盖物
+            var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+            mappoit2 = pp;
+            if (mappoit1.length != 0) {
+                var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+                driving.search(mappoit1, mappoit2);
+            } else {
+                map.centerAndZoom(pp, 16);
+                map.addOverlay(new BMap.Marker(pp));    //添加标注
+            }
+        }
+
+        //智能搜索
+        var local = new BMap.LocalSearch(map, {onSearchComplete: myFun});
+        local.search(myValue2);
+    });
+    //============================
+
+    // 根据名称获取坐标和标注到图上的方法
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    var local = new BMap.LocalSearch(map, {
+        onSearchComplete: function() {
+            map.clearOverlays(); //清除地图上所有覆盖物
+            var point = local.getResults().getPoi(0).point; // point 就是获取到的坐标
+            map.centerAndZoom(point, 16);
+            map.addOverlay(new BMap.Marker(point));
+        }
+    });
+    local.search("大连大学");
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    //============================ Layui 部分
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(form-sub)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>
