@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <!--360浏览器优先以webkit内核解析-->
+    <title>路线招募</title>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <link href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet" media="all">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg">
+    </script>
+    <script type="text/javascript" src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+</head>
+
+<body class="gray-bg">
+<div class="layui-row  border-bottom white-bg dashboard-header">
+    <div class="layui-col-xs2" style=" padding: 10px;"></div>
+    <div class="layui-col-xs8" style="padding: 10px;">
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
+            <h2><i class="fa fa-map-marker"></i> 路线招募 |
+                <small>欢迎访问定制公交后台管理系统</small>
+            </h2>
+        </div>
+
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 1% 10px;">
+
+            <table lay-filter="demo">
+                <thead>
+                <tr>
+                    <th lay-data="{field:'busName', width:120}">公交编号</th>
+                    <th lay-data="{field:'livePlace',  sort:true}">居住地点</th>
+                    <th lay-data="{field:'startTime',sort:true}">发车时间</th>
+                    <th lay-data="{field:'operNum',sort:true}">抵达时间</th>
+                    <th lay-data="{field:'jobPlace',sort:true}">工作地点</th>
+                    <th lay-data="{field:'endTime', sort:true}">返程时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>一号线</td>
+                    <td>老虎滩</td>
+                    <td>06:30</td>
+                    <td>08:00</td>
+                    <td>科技生态城</td>
+                    <td>17:30</td>
+                </tr>
+                <tr>
+                    <td>二号线</td>
+                    <td>软件园</td>
+                    <td>07:30</td>
+                    <td>09:00</td>
+                    <td>和平广场</td>
+                    <td>18:30</td>
+                </tr>
+
+                <tr>
+                    <td>三号线</td>
+                    <td>大连外国语大学</td>
+                    <td>06:30</td>
+                    <td>08:30</td>
+                    <td>大连海事大学</td>
+                    <td>18:30</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+    <div class="layui-col-xs2" style=" padding: 10px;"></div>
+</div>
+<script type="text/html" id="checkboxTpl">
+    <input type="checkbox" name="lock" value="{{d.operNum}}" title="投票" lay-filter="lockDemo">
+</script>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/Cookie.js}"></script>
+<script th:inline="none">
+
+    //============================ Layui 部分
+    layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            table = layui.table;
+        laydate = layui.laydate;
+
+        //转换静态表格
+        table.init('demo', {
+            height: 315 //设置高度
+            , limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            , toolbar: true
+            , page: true
+            //支持所有基础参数
+        });
+
+        //监听行单击事件（单击事件为：rowDouble）
+        table.on('row(demo)', function (obj) {
+
+            var data = obj.data;
+            setCookie("livePlace",data.livePlace);
+            setCookie("jobPlace",data.jobPlace);
+            obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+            layer.open({
+                title: '查看路线',
+                type: 2,
+                skin: 'CLYM-style',
+                area: ['950px','560px'],
+                maxmin: true,
+                btn: ['确认投票', '关闭窗口'],
+                content: '/suser/showMap'
+                ,yes: function(index, layero){
+                    setTimeout(function () {
+                        layer.msg("投票成功");
+                    }, 600);
+                }
+            });
+
+        });
+    });
+
+
+</script>
+
+</body>
+
+</html>

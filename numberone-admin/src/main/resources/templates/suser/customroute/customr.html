@@ -111,10 +111,12 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" id="layui-btn" lay-submit lay-filter="form-sub">提交需求</button>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button class="layui-btn"  type="button"  id="layui-btn" lay-submit lay-filter="form-sub">提交需求</button>
+                        <button id="delectId" type="reset" class="layui-btn layui-btn-danger">清除需求</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置表单</button>
                     </div>
                 </div>
+
 
             </form>
 
@@ -133,6 +135,8 @@
     var mappoit1 = ""; // 居住点坐标
     var mappoit2 = "";
 
+    var loginName = getCookie("loginName");
+
     // 公共函数
     function G(id) {
         return document.getElementById(id);
@@ -146,6 +150,7 @@
     map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT}));
     map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));
     map.addControl(new BMap.OverviewMapControl({isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT}));
+
 
     //============================ 对两个点的处理
     var myValue; // 存储了选中位置的地理位置
@@ -235,18 +240,7 @@
     });
     //============================
 
-    // 根据名称获取坐标和标注到图上的方法
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // var local = new BMap.LocalSearch(map, {
-    //     onSearchComplete: function() {
-    //         map.clearOverlays(); //清除地图上所有覆盖物
-    //         var point = local.getResults().getPoi(0).point; // point 就是获取到的坐标
-    //         map.centerAndZoom(point, 16);
-    //         map.addOverlay(new BMap.Marker(point));
-    //     }
-    // });
-    // local.search("大连大学");
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
 
     //============================ Layui 部分
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -255,8 +249,8 @@
             layedit = layui.layedit,
             laydate = layui.laydate;
 
-        var loginName = getCookie("loginName");
         var twap = {"loginName": loginName};
+        console.log("开始进入 ajax 第一次判定");
         $.ajax({
             url: "/suser/customroute/first",
             data: JSON.stringify(twap),
@@ -264,8 +258,12 @@
             contentType: "application/json;charset=utf-8",
             success: function (response) {
                 //前端调用成功后，可以处理后端传回的json格式数据。
-                var temp = JSON.parse(response); // 将 json duixiang huawei json zifuchuan
-                if (response != null) {
+                var temp = JSON.parse(response); // 将 json 对象换为 json 字符串
+                if (response != "null") {
+                    console.log("if 潘丹");
+                    setTimeout(function() {
+                        layer.msg("成功加载数据");
+                    }, 2000);
                     //表单初始赋值
                     form.val('layui-form', {
                         "live_place": temp.livePlace // "name": "value"
@@ -274,10 +272,11 @@
                         , "off_time": temp.endTime
                         , "now_type": temp.nowType
                     });
-
                     var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});
                     driving.search(temp.livePlace, temp.jobPlace);
+
                 }
+
             }
         });
 
@@ -305,9 +304,28 @@
 
                 }
             });
-            return false;
         });
 
+    });
+
+    // 清除按钮的点击事件
+    $("#delectId").click(function () {
+        var twap = {"loginName": loginName};
+        $.ajax({
+            url: "/suser/customroute/delect",
+            data: JSON.stringify(twap),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            success: function (response) {
+                //前端调用成功后，可以处理后端传回的json格式数据。
+                if (response == 0) {
+                    layer.msg("未发现需求内容");
+                }  else {
+                    layer.msg("需求信息已删除");
+                }
+
+            }
+        });
     });
 
 </script>

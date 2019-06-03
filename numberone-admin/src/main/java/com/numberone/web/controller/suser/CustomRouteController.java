@@ -78,4 +78,18 @@ public class CustomRouteController {
         return gson.toJson(userRouteService.findByLoginName(loginName));
     }
 
+    @RequestMapping("/delect")
+    @ResponseBody
+    public Object delectByName(@RequestBody JSONObject params) {
+        String loginName = params.getStr("loginName");
+        UserRoute route = userRouteService.findByLoginName(loginName);
+        if (route == null) {
+            return 0;
+        } else {
+            userRouteService.delectById(route.getUserRouteId());
+            return 1;
+        }
+
+    }
+
 }

@@ -5,37 +5,33 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <!--360浏览器优先以webkit内核解析-->
-    <title>路线招募</title>
+    <title>定制公交</title>
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
     <link href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet" media="all">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg">
-    </script>
     <script type="text/javascript" src="../static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg"></script>
 </head>
 
 <body class="gray-bg">
 <div class="layui-row  border-bottom white-bg dashboard-header">
-    <div class="layui-col-xs6" style="padding: 10px;">
-        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
-            <h2><i class="fa fa-map-marker"></i> 路线招募 |
-                <small>欢迎访问定制公交后台管理系统</small>
-            </h2>
 
+    <div class="layui-col-xs4" style="padding: 10px;">
+        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
+            <h2> 查看路线详情</h2>
         </div>
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 10px">
-            <small>Tips：在选择起点和终点之后，还可以指定途径点。</small>
+            <small>
+                居住地点：<div id="div1"></div>
+                工作地点：<div id="div2"></div></small>
         </div>
 
-        <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 1% 10px;">
-
-
-
-        </div>
     </div>
-    <div class="layui-col-xs6" style=" padding: 10px;">
+    <div class="layui-col-xs8" style=" padding: 10px;">
         <div id="allmap" style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);height: -webkit-fill-available;"></div>
     </div>
+
 </div>
 
 <script th:src="@{/js/jquery.min.js}"></script>
@@ -43,6 +39,22 @@
 <script th:src="@{/js/Cookie.js}"></script>
 <script type="text/javascript">
 
+    var livePlace = getCookie("livePlace");
+    var jobPlace = getCookie("jobPlace");
+
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom("大连", 12);
+    map.enableScrollWheelZoom(true);
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT}));
+    map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));
+    map.addControl(new BMap.OverviewMapControl({isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT}));
+
+    var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "r-result", autoViewport: true}});
+    driving.search(livePlace, jobPlace);
+
+    $("#div1").text(livePlace);
+    $("#div2").text(jobPlace);
 
     //============================ Layui 部分
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -51,9 +63,9 @@
             layedit = layui.layedit,
             laydate = layui.laydate;
 
-
+        removeCookie("livePlace");
+        removeCookie("jobPlace");
     });
-
 </script>
 
 </body>
