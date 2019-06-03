@@ -3,6 +3,7 @@ package com.numberone.web.controller.szyink.index;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 网站的首页，在 ShiroConfig.java 里配置了忽略过滤
@@ -19,4 +20,5 @@ public class IndexWebController {
 
         return prefix + "index.html";
     }
+
 }

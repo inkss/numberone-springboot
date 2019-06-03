@@ -23,6 +23,12 @@ public class UserRouteServiceImpl implements UserRouteService {
     }
 
     @Override
+    public void delectById(Long id) {
+        routeRepository.deleteByUserRouteId(id);
+        routeRepository.flush();
+    }
+
+    @Override
     public void insertUserRoute(UserRoute userRoute) {
         routeRepository.save(userRoute);
     }

@@ -2,14 +2,14 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <!--360浏览器优先以webkit内核解析-->
     <title>定制需求</title>
-<!--    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />-->
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
-<!--    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />-->
-    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
+    <!--    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />-->
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <!--    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />-->
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
     <link href="../static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet" media="all">
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=alE7lRqE2PQPgG2nt6nKWlpwv5UZXHcg">
     </script>
@@ -20,7 +20,9 @@
 <div class="layui-row  border-bottom white-bg dashboard-header">
     <div class="layui-col-xs6" style="padding: 10px;">
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);padding: 10px">
-            <h2><i class="fa fa-map-marker"></i> 定制需求 | <small>欢迎访问定制公交后台管理系统</small></h2>
+            <h2><i class="fa fa-map-marker"></i> 定制需求 |
+                <small>欢迎访问定制公交后台管理系统</small>
+            </h2>
 
         </div>
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 10px">
@@ -34,23 +36,27 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">居住地</label>
                     <div class="layui-input-block">
-                        <input type="text" id="suggestId" name="live_place" autocomplete="off" lay-verify="required" placeholder="请选择上班出发地点" class="layui-input" >
-                        <div id="searchResultPanel"  style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                        <input type="text" id="suggestId" name="live_place" autocomplete="off" lay-verify="required"
+                               placeholder="请选择上班出发地点" class="layui-input">
+                        <div id="searchResultPanel"
+                             style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">办公地</label>
                     <div class="layui-input-block">
-                        <input type="text" id="suggestId2" name="job_place" autocomplete="off" lay-verify="required" placeholder="请选择下班出发地点" class="layui-input">
-                        <div id="searchResultPanel2" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                        <input type="text" id="suggestId2" name="job_place" autocomplete="off" lay-verify="required"
+                               placeholder="请选择下班出发地点" class="layui-input">
+                        <div id="searchResultPanel2"
+                             style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">上班时间</label>
-                        <div class="layui-input-inline" >
+                        <div class="layui-input-inline">
                             <select name="work_time" lay-verify="required">
                                 <option value="">选择您的上班时间</option>
                                 <option value="08:00">08:00</option>
@@ -95,7 +101,7 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">当前出行</label>
-                    <div class="layui-input-block"  >
+                    <div class="layui-input-block">
                         <input type="radio" name="now_type" value="1" title="公交" checked="">
                         <input type="radio" name="now_type" value="2" title="地铁">
                         <input type="radio" name="now_type" value="3" title="出租">
@@ -143,41 +149,42 @@
 
     //============================ 对两个点的处理
     var myValue; // 存储了选中位置的地理位置
-    var ac = new BMap.Autocomplete({"input" : "suggestId","location" : map});
-    ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+    var ac = new BMap.Autocomplete({"input": "suggestId", "location": map});
+    ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
         var str = "";
         var _value = e.fromitem.value;
         var value = "";
         if (e.fromitem.index > -1) {
-            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
         }
         str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
 
         value = "";
         if (e.toitem.index > -1) {
             _value = e.toitem.value;
-            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
         }
         str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
         G("searchResultPanel").innerHTML = str;
     });
-    ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+    ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
         var _value = e.item.value;
-        myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-        G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+        myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
 
         map.clearOverlays();    //清除地图上所有覆盖物
-        function myFun(){
+        function myFun() {
             var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
             mappoit1 = pp;
             if (mappoit2.length != 0) {  // 这个判断是当一个输入框已经有值了，便执行路线规划
-                var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+                var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});
                 driving.search(mappoit1, mappoit2);
             } else { // 否则便是设置搜索点到地图中央
                 map.centerAndZoom(pp, 16);
                 map.addOverlay(new BMap.Marker(pp));    //添加标注
             }
         }
+
         var local = new BMap.LocalSearch(map, { //智能搜索
             onSearchComplete: myFun
         });
@@ -186,35 +193,35 @@
 
     // 2 点和 1 点的处理逻辑是一样的，实在没心情抽象它为函数了
     var myValue2; // 存储了选中位置的地理位置
-    var ac2 = new BMap.Autocomplete({"input" : "suggestId2","location" : map});
-    ac2.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+    var ac2 = new BMap.Autocomplete({"input": "suggestId2", "location": map});
+    ac2.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
         var str = "";
         var _value = e.fromitem.value;
         var value = "";
         if (e.fromitem.index > -1) {
-            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
         }
         str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
 
         value = "";
         if (e.toitem.index > -1) {
             _value = e.toitem.value;
-            value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
         }
         str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
         G("searchResultPanel").innerHTML = str;
     });
-    ac2.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+    ac2.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
         var _value = e.item.value;
-        myValue2 = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-        G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue2;
+        myValue2 = _value.province + _value.city + _value.district + _value.street + _value.business;
+        G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue2;
 
-        function myFun(){
+        function myFun() {
             map.clearOverlays();    //清除地图上所有覆盖物
             var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
             mappoit2 = pp;
             if (mappoit1.length != 0) {
-                var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+                var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});
                 driving.search(mappoit1, mappoit2);
             } else {
                 map.centerAndZoom(pp, 16);
@@ -250,46 +257,52 @@
 
         var loginName = getCookie("loginName");
         var twap = {"loginName": loginName};
-        console.log(JSON.stringify(twap));
         $.ajax({
             url: "/suser/customroute/first",
             data: JSON.stringify(twap),
             type: "POST",
             contentType: "application/json;charset=utf-8",
-            success: function(response){
+            success: function (response) {
                 //前端调用成功后，可以处理后端传回的json格式数据。
-                console.log(response);
                 var temp = JSON.parse(response); // 将 json duixiang huawei json zifuchuan
                 if (response != null) {
-                    console.log("进入判断部分");
-                    console.log(temp.livePlace);
                     //表单初始赋值
                     form.val('layui-form', {
                         "live_place": temp.livePlace // "name": "value"
-                        ,"job_place": temp.jobPlace
-                        ,"work_time": temp.startTime
-                        ,"off_time": temp.endTime
-                        ,"now_type": temp.nowType
+                        , "job_place": temp.jobPlace
+                        , "work_time": temp.startTime
+                        , "off_time": temp.endTime
+                        , "now_type": temp.nowType
                     });
+
+                    var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, autoViewport: true}});
+                    driving.search(temp.livePlace, temp.jobPlace);
                 }
             }
         });
 
 
         //监听提交
-        form.on('submit(form-sub)', function(data){
+        form.on('submit(form-sub)', function (data) {
 
             //layer.msg(JSON.stringify(data.field));
-            data.field.loginName=loginName;
+            data.field.loginName = loginName;
 
             $.ajax({
                 url: "/suser/customroute/insert",
                 data: JSON.stringify(data.field),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
-                success: function(response){
+                success: function (response) {
                     //前端调用成功后，可以处理后端传回的json格式数据。
-                        console.log(response);
+                    if (response = 2) {
+                        layer.msg("更新成功");
+                    } else if (response = 1) {
+                        layer.msg("提交成功");
+                    }  else {
+                        layer.alert("失败");
+                    }
+
                 }
             });
             return false;

@@ -9,6 +9,8 @@ public interface UserRouteService {
 
     UserRoute findByLoginName(String loginName);
 
+    void delectById(Long id);
+
     void insertUserRoute(UserRoute userRoute);
 
 

@@ -36,12 +36,12 @@ public class CustomRouteController {
 
     }
 
+
     @RequestMapping("/insert")
     @ResponseBody
     public Object insertCustomRoute(@RequestBody JSONObject params) {
         //{"live_place":"大连市中山区大连大学附属中山医院","job_place":"大连市中山区大连火车站-公交车站","work_time":"09:00","off_time":"18:00","now_type":"2"}
         try {
-            System.out.println("====================");
             String livePlace = params.getStr("live_place");
             String jobPlace = params.getStr("job_place");
             String workTime = params.getStr("work_time");
@@ -49,16 +49,22 @@ public class CustomRouteController {
             Integer nowType = Integer.valueOf(params.getStr("now_type"));
             String loginName = params.getStr("loginName");
 
-            //System.out.println(userService.selectUserByLoginName(loginName)); // 根据登录名查询用户
+            UserRoute routes = userRouteService.findByLoginName(loginName);
             UserRoute userRoute = new UserRoute(loginName, livePlace, jobPlace, workTime, offTime, nowType, new Date());
-            if (userRouteService.findByLoginName(loginName) != null) {
-                System.out.println("进入判断");
+            if (routes != null) {
+                //修改操作  如果使用的JPA,应该是 findByUid之后 将新的值对old进行赋值,最后对old值进行flush(),即可完成更新,而不应该去更新新的实体.
+                routes.setJobPlace(userRoute.getJobPlace());
+                routes.setLivePlace(userRoute.getLivePlace());
+                routes.setEndTime(userRoute.getEndTime());
+                routes.setStartTime(userRoute.getStartTime());
+                routes.setOperTime(new Date());
+                routes.setNowType(userRoute.getNowType());
+                userRouteService.insertUserRoute(routes);
                 return "2"; // 视为已经存在定制需求
+            } else {
+                userRouteService.insertUserRoute(userRoute);
+                return 1;
             }
-
-            userRouteService.insertUserRoute(userRoute);
-            System.out.println("===============================");
-            return 1;
         } catch (Exception e) {
             return 0;
         }
@@ -67,12 +73,8 @@ public class CustomRouteController {
     @RequestMapping("/first")
     @ResponseBody
     public Object firstSelect(@RequestBody JSONObject params) {
-        System.out.println("sadsdafehabfi===========" + params);
         String loginName = params.getStr("loginName");
-        System.out.println("====================");
-        System.out.println(loginName);
         Gson gson = new Gson();
-        System.out.println(gson.toJson(userRouteService.findByLoginName(loginName)));
         return gson.toJson(userRouteService.findByLoginName(loginName));
     }
 
