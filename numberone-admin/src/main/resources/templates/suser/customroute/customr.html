@@ -29,13 +29,13 @@
 
         <div style=" box-shadow: 1px 1px 3px rgba(0,0,0,.2);margin-top: 20px;padding: 1% 10px;">
 
-            <form class="layui-form" action="">
+            <form class="layui-form" lay-filter="layui-form">
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">居住地</label>
                     <div class="layui-input-block">
                         <input type="text" id="suggestId" name="live_place" autocomplete="off" lay-verify="required" placeholder="请选择上班出发地点" class="layui-input" >
-                        <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                        <div id="searchResultPanel"  style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                     </div>
                 </div>
 
@@ -95,8 +95,8 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">当前出行</label>
-                    <div class="layui-input-block" >
-                        <input type="radio" name="now_type" value="1" title="公交">
+                    <div class="layui-input-block"  >
+                        <input type="radio" name="now_type" value="1" title="公交" checked="">
                         <input type="radio" name="now_type" value="2" title="地铁">
                         <input type="radio" name="now_type" value="3" title="出租">
                         <input type="radio" name="now_type" value="4" title="自驾">
@@ -105,7 +105,7 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="form-sub">提交需求</button>
+                        <button class="layui-btn" id="layui-btn" lay-submit lay-filter="form-sub">提交需求</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -121,6 +121,7 @@
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/Cookie.js}"></script>
 <script type="text/javascript">
     // 公共变量
     var mappoit1 = ""; // 居住点坐标
@@ -247,9 +248,50 @@
             layedit = layui.layedit,
             laydate = layui.laydate;
 
+        var loginName = getCookie("loginName");
+        var twap = {"loginName": loginName};
+        console.log(JSON.stringify(twap));
+        $.ajax({
+            url: "/suser/customroute/first",
+            data: JSON.stringify(twap),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            success: function(response){
+                //前端调用成功后，可以处理后端传回的json格式数据。
+                console.log(response);
+                var temp = JSON.parse(response); // 将 json duixiang huawei json zifuchuan
+                if (response != null) {
+                    console.log("进入判断部分");
+                    console.log(temp.livePlace);
+                    //表单初始赋值
+                    form.val('layui-form', {
+                        "live_place": temp.livePlace // "name": "value"
+                        ,"job_place": temp.jobPlace
+                        ,"work_time": temp.startTime
+                        ,"off_time": temp.endTime
+                        ,"now_type": temp.nowType
+                    });
+                }
+            }
+        });
+
+
         //监听提交
         form.on('submit(form-sub)', function(data){
-            layer.msg(JSON.stringify(data.field));
+
+            //layer.msg(JSON.stringify(data.field));
+            data.field.loginName=loginName;
+
+            $.ajax({
+                url: "/suser/customroute/insert",
+                data: JSON.stringify(data.field),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                success: function(response){
+                    //前端调用成功后，可以处理后端传回的json格式数据。
+                        console.log(response);
+                }
+            });
             return false;
         });
 

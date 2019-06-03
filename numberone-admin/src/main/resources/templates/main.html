@@ -38,6 +38,7 @@
             <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
             <p><i class="fa fa-calendar"></i> [[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</p>
             <hr>
+            <div id="loginName" style="visibility: hidden;">[[${user.loginName}]]</div>
         </div>
         <div class="col-sm-9" >
             <h2>一、定制公交介绍</h2>
@@ -87,6 +88,11 @@
 
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/Cookie.js}"></script>
+    <script>
+        var loginName = $("#loginName").text();
+        setCookie("loginName",loginName);
+    </script>
 </body>
 
 </html>

@@ -97,20 +97,6 @@
             <version>${numberone.version}</version>
         </dependency>
         
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.numberone</groupId>
-            <artifactId>numberone-quartz</artifactId>
-            <version>${numberone.version}</version>
-        </dependency>
-        
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>com.numberone</groupId>
-            <artifactId>numberone-generator</artifactId>
-            <version>${numberone.version}</version>
-        </dependency>
-        
 		<!-- pagehelper 分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>

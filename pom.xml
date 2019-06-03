@@ -43,6 +43,7 @@
         <module>numberone-admin</module>
         <module>numberone-framework</module>
         <module>numberone-system</module>
+        <module>numberone-suncustom</module>
         <module>numberone-common</module>
     </modules>
     <packaging>pom</packaging>
