@@ -97,24 +97,24 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialec
 spring.jpa.show-sql=true
 ```
 
-## 目录结构
+### 目录结构推荐
 
-- 实体类
-  - A: com.xxx.domain（jpa项目）
-  - B: com.xxx.pojo（mybatis项目）
-- 数据访问层
-  - A: com.xxx.repository（jpa项目）
-  - B: com.xxx.mapper（mybatis项目）
-- 服务层
-  - 接口：com.xxx.service
-  - 实现：com.xxx.service.impl
-- 控制层
-  - com.xxx.controller
-- 页面文件
-  - 静态文件：/src/main/resources/static
-  - 视图模板：/src/main/resources/templates
-- Mybatis 映射文件
-  - /src/main/resources/mapper
+- **实体类**
+  - A: `com.xxx.domain`（jpa项目）
+  - B: `com.xxx.pojo`（mybatis项目）
+- **数据访问层**
+  - A: `com.xxx.repository`（jpa项目）
+  - B: `com.xxx.mapper`（mybatis项目）
+- **服务层**
+  - 接口：`com.xxx.service`
+  - 实现：`com.xxx.service.impl`
+- **控制层**
+  - `com.xxx.controller`
+- **页面文件**
+  - 静态文件：`/src/main/resources/static`
+  - 视图模板：`/src/main/resources/templates`
+- **Mybatis 映射文件**
+  - `/src/main/resources/mapper`
 
 # 三、运行截图
 
