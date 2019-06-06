@@ -120,8 +120,6 @@ spring.jpa.show-sql=true
 
 ![](sql/img/0604110044-1455x776.png)
 
-![](sql/img/0604110157-1266x670.png)
-
 ![](sql/img/0604110512-1339x725.png)
 
 ![](sql/img/0604110626-1339x725.png)
